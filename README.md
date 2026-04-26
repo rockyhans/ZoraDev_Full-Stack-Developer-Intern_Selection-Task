@@ -20,9 +20,6 @@ zoradev-task-manager/
 │
 └── frontend/
     ├── index.html          # Vite HTML entry — loads Google Fonts, mounts #root
-    ├── vite.config.js      # Vite config (port 3000)
-    ├── vercel.json         # Vercel deployment config (build: vite build)
-    ├── .env.example        # Copy to .env → set VITE_API_URL
     ├── package.json        # Dependencies: react, react-dom, vite
     └── src/
         ├── main.jsx        # ReactDOM.createRoot — app entry point
@@ -34,11 +31,6 @@ zoradev-task-manager/
 ---
 
 ## Running Locally
-
-### Prerequisites
-
-- **Node.js** ≥ 18
-- **npm** ≥ 9
 
 ---
 
@@ -69,8 +61,6 @@ npm start
 ```bash
 cd frontend
 npm install
-cp .env.example .env
-# .env already defaults to VITE_API_URL=http://localhost:4000
 npm run dev
 # Frontend running on http://localhost:3000
 ```
@@ -116,17 +106,6 @@ Base URL (local): `http://localhost:4000`
 4. Copy your service URL (e.g. `https://zoradev-api.onrender.com`)
 
 > Note: Free Render services spin down after 15 minutes of inactivity. First load may take ~30 seconds.
-
----
-
-### Frontend → Vercel (free tier)
-
-1. Go to [vercel.com](https://vercel.com) → **Import** your GitHub repo
-2. Set the following:
-   - **Root directory:** `frontend`
-   - **Framework preset:** Vite
-   - **Environment variable:** `VITE_API_URL` = your Render backend URL (no trailing slash)
-3. Click **Deploy**
 
 ---
 
