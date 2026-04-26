@@ -1,118 +1,173 @@
-# ✦ Task Manager — ZoraDev Selection Task
+# ✦ ZoraDev — Mini Task Manager App
 
-A full-stack task manager with a React frontend and a Node.js + Express REST API. Tasks are stored in-memory on the server; no database is needed.
+A clean and functional full-stack Task Manager application built as part of the ZoraDev Full Stack Developer Intern selection task.
 
-**Live links (fill after deploying):**
-- Frontend: `https://<your-app>.vercel.app`
-- Backend: `https://<your-app>.onrender.com`
+🔗 **Live Demo:** https://frontend-zero-dev.vercel.app/  
+📦 **GitHub Repo:** https://github.com/rockyhans/ZoraDev_Full-Stack-Developer-Intern_Selection-Task  
 
 ---
 
-## Folder Structure
+## 🚀 Overview
 
-```
-zoradev-task-manager/
+This project demonstrates a simple full-stack application where users can:
+
+- Add tasks  
+- View all tasks  
+- Delete tasks  
+- Toggle task completion (bonus feature)  
+
+The focus was on **clean architecture, working API integration, and a polished UI/UX** rather than overengineering.
+
+---
+
+## 🧩 Tech Stack
+
+### Frontend
+- React (Vite)  
+- Axios  
+- Custom CSS (modern dark UI)  
+
+### Backend
+- Node.js  
+- Express  
+- UUID (for unique IDs)  
+
+---
+
+## ⚙️ Features
+
+### ✅ Core Features
+- Create tasks  
+- View all tasks  
+- Delete tasks  
+
+### ⭐ Bonus Feature
+- Toggle task as complete/incomplete  
+
+### 🎨 UI/UX Enhancements
+- Loading states  
+- Error handling banner  
+- Sticky input field  
+- Smooth animations  
+- Progress bar (task completion)  
+- Responsive design  
+- Micro-interactions (hover, click feedback)  
+
+---
+
+## 🔌 API Endpoints
+
+| Method | Endpoint        | Description              |
+|--------|---------------|--------------------------|
+| GET    | /tasks        | Fetch all tasks          |
+| POST   | /tasks        | Create a new task        |
+| DELETE | /tasks/:id    | Delete a task            |
+| PATCH  | /tasks/:id    | Toggle task completion   |
+
+---
+
+## 📁 Folder Structure
+
+
+project-root/
+
 ├── backend/
-│   ├── server.js          # Express app — all routes live here
-│   └── package.json
-└── frontend/
-    ├── index.html          # Vite entry point (loads fonts, mounts #root)
-    ├── vite.config.js
-    ├── vercel.json         # Vercel deployment config
-    ├── .env.example        # Copy → .env and set VITE_API_URL
-    └── src/
-        ├── main.jsx        # ReactDOM.createRoot
-        ├── App.jsx         # All UI logic and state
-        ├── api.js          # Fetch helpers (one function per endpoint)
-        └── index.css       # All styles (CSS variables, dark theme)
-```
+│ ├── server.js
+│ └── package.json
+│
+├── frontend/
+│ ├── src/
+│ │ ├── App.jsx
+│ │ ├── api.js
+│ │ └── App.css
+│ └── package.json
+│
+└── README.md
+
 
 ---
 
-## Running Locally
+## 🧠 Key Decisions
 
-### Prerequisites
-- Node.js ≥ 18
-- npm
+- Used **in-memory storage (array)** as per assignment instructions  
+- Separated API logic (`api.js`) from UI logic  
+- Used **UUID** for reliable unique IDs  
+- Implemented **optimistic UI updates** for better user experience  
+- Focused on **minimal but meaningful UI enhancements**  
 
-### 1 — Clone the repo
+---
 
-```bash
-git clone https://github.com/<your-username>/zoradev-task-manager.git
-cd zoradev-task-manager
-```
+## 🛠️ Run Locally
 
-### 2 — Start the backend
+### 1️⃣ Clone the Repository
 
-```bash
+git clone https://github.com/rockyhans/ZoraDev_Full-Stack-Developer-Intern_Selection-Task.git
+
+cd ZoraDev_Full-Stack-Developer-Intern_Selection-Task
+
+
+---
+
+### 2️⃣ Run Backend
+
 cd backend
 npm install
-npm start          # runs on http://localhost:4000
-```
+node server.js
 
-> For auto-reload during development: `npm run dev` (uses nodemon)
 
-### 3 — Start the frontend (new terminal)
+Server runs on:
 
-```bash
+http://localhost:4000
+
+
+---
+
+### 3️⃣ Run Frontend
+
 cd frontend
 npm install
-cp .env.example .env   # VITE_API_URL defaults to http://localhost:4000
-npm run dev            # runs on http://localhost:3000
-```
+npm run dev
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
----
+Frontend runs on:
 
-## API Reference
+http://localhost:5173
 
-| Method | Endpoint         | Body              | Response            |
-|--------|-----------------|-------------------|---------------------|
-| GET    | `/tasks`        | —                 | `Task[]`            |
-| POST   | `/tasks`        | `{ title: str }`  | `Task` (201)        |
-| PATCH  | `/tasks/:id`    | —                 | `Task` (toggled)    |
-| DELETE | `/tasks/:id`    | —                 | 204 No Content      |
-
-**Task shape:**
-```json
-{ "id": "uuid-v4", "title": "string", "completed": false }
-```
 
 ---
 
-## Deploying
+## 🌐 Deployment
 
-### Backend → Render (free tier)
+- **Frontend:** Vercel  
+- **Backend:** Render  
 
-1. Push code to GitHub.
-2. New Web Service on [render.com](https://render.com) → connect repo.
-3. Root directory: `backend`
-4. Build command: `npm install`
-5. Start command: `npm start`
-6. Copy the service URL (e.g. `https://zoradev-api.onrender.com`).
-
-### Frontend → Vercel (free tier)
-
-1. Import repo on [vercel.com](https://vercel.com).
-2. Root directory: `frontend`
-3. Framework preset: **Vite**
-4. Environment variable: `VITE_API_URL` = your Render URL
-5. Deploy.
+The frontend is configured to communicate with the deployed backend API.
 
 ---
 
-## Assumptions & Decisions
+## ⚠️ Assumptions & Notes
 
-- **In-memory storage** — The spec explicitly permits a plain JS array. Data resets on server restart; that's expected.
-- **uuid v4** — Used for task IDs to avoid collision bugs that occur with simple integer counters when deletes are involved.
-- **Vite over CRA** — Vite is the current standard for React projects; much faster dev server with no unnecessary boilerplate.
-- **PATCH for toggle** — Added a `PATCH /tasks/:id` endpoint (beyond the required three) to support the bonus completion toggle without a separate PUT body schema.
-- **Single-file API module** (`api.js`) — All `fetch` calls are centralised so the component never constructs URLs manually. Easier to swap the base URL or add auth later.
-- **No UI library** — Styled from scratch with CSS variables to keep the bundle small and the code readable.
+- No database is used (as per instructions)  
+- Data resets when the server restarts  
+- Focus was on functionality + clean UI rather than persistence  
 
 ---
 
-## Bonus Feature
+## 🏁 Final Thoughts
 
-Each task has a circular toggle button. Clicking it sends `PATCH /tasks/:id` to the backend, which flips the `completed` boolean. Completed tasks are shown with a strikethrough and reduced opacity.
+This project demonstrates:
+
+- Full-stack architecture understanding  
+- Clean API design  
+- Frontend-backend integration  
+- UI/UX attention to detail  
+
+---
+
+## 📬 Submission
+
+Submitted as part of ZoraDev Full Stack Developer Intern selection process.
+
+---
+
+**Built with focus, clarity, and simplicity.**
